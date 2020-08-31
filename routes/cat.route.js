@@ -12,7 +12,7 @@ router.get("/:id", async(req, res) => {
 
         res.status(200).json({
             message: "cat found",
-            item,
+            cat,
         });
     } catch (err) {
         res.status(500).json({
