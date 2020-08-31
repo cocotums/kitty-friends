@@ -14,11 +14,11 @@ const catSchema = Schema({
         type: String,
         required: false,
     },
-    // location: {
-    //     type: String,
-    //     required: true,
-    // },
-    // // imgUrl: String,
+    location: [{
+        type: Number,
+        required: true,
+    }, ],
+    // imgUrl: String,
     // imgUrls: [{
     //     path: String,
     //     featured: Boolean,

@@ -84,20 +84,23 @@ router.post("/", async(req, res) => {
     @desc Gets all items
     @access public
 */
-// router.get("/", checkToken, async(req, res) => {
-//     try {
-//         let items = await Item.find();
 
-//         res.status(200).send({
-//             count: items.length,
-//             items,
-//         });
-//     } catch (error) {
-//         res.status(500).json({
-//             message: "1010101001111000111",
-//             statuscode: "EB500",
-//         });
-//     }
-// });
+//checkToken,
+
+router.get("/", async(req, res) => {
+    try {
+        let cats = await Cat.find();
+
+        res.status(200).send({
+            count: cats.length,
+            cats,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "booo fail",
+            statuscode: "EB500",
+        });
+    }
+});
 
 module.exports = router;
