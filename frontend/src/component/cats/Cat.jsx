@@ -3,6 +3,7 @@ import Axios from "axios";
 
 import { Container, Button } from "react-bootstrap";
 import EditCat from "./EditCat";
+import { Redirect } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -10,6 +11,7 @@ export default class Cat extends Component {
   state = {
     cat: null,
     edit: false,
+    deleteCat: false,
   };
 
   showEdit = () => {
@@ -21,6 +23,17 @@ export default class Cat extends Component {
         // console.log("done");
         //call method to call a re render
         this.getCat();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  removeCat = () => {
+    Axios.delete(`${URL}/cats/${this.props.match.params.id}`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ deleteCat: true });
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +54,10 @@ export default class Cat extends Component {
     this.getCat();
   }
   render() {
-    let { cat, edit } = this.state;
+    let { cat, edit, deleteCat } = this.state;
+    if (deleteCat) {
+      return <Redirect to="/" />;
+    }
     return (
       <Container>
         <h1>Single Cat</h1>
@@ -58,6 +74,8 @@ export default class Cat extends Component {
         ) : (
           "ho liao buey!"
         )}
+
+        <button onClick={this.removeCat}>Remove cat</button>
       </Container>
     );
   }
