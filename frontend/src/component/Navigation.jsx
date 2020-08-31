@@ -20,9 +20,7 @@ function Navigation({ user, logout }) {
         <Nav>
           {user ? (
             <>
-              <Nav.Link href="#user">
-                {user.firstname} {user.lastname}
-              </Nav.Link>
+              <Nav.Link href="#user">{user.username}</Nav.Link>
               <Link to="/logout" className="nav-link" onClick={logout}>
                 Logout
               </Link>
