@@ -15,6 +15,7 @@ import { decode } from "jsonwebtoken";
 import PrivateRoute from "./component/PrivateRoute";
 import { Alert } from "react-bootstrap";
 import Cat from "./component/cats/Cat";
+import Chat from "./component/chats/Chat";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -134,6 +135,7 @@ export default class App extends Component {
 
           {/* <Route path="/" exact render={() => <Home />} /> */}
           <Route path="/cat/add" exact render={() => <AddCat />} />
+
           <PrivateRoute exact path="/cat/:id" isAuth={isAuth} component={Cat} />
           {/* <Route path="/item/:id" component={Item} /> */}
           <Route
@@ -148,6 +150,8 @@ export default class App extends Component {
               isAuth ? <Redirect to="/" /> : <Login login={this.loginHandler} />
             }
           />
+
+          <Route path="/chat" exact component={Chat} />
         </Switch>
       </Router>
     );

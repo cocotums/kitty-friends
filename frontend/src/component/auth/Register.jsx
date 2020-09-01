@@ -8,7 +8,6 @@ export default class Register extends Component {
     name: "",
     username: "",
     mobileNumber: "",
-    profilePicture: "",
   };
 
   changeHandler = (e) => {
@@ -61,11 +60,7 @@ export default class Register extends Component {
                 onChange={this.changeHandler}
               />
             </Row>
-            <Form.Control
-              name="profilePicture"
-              value={profilePicture}
-              onChange={this.changeHandler}
-            />
+
             <Button variant="primary" block onClick={this.registerHandler}>
               {" "}
               Login
