@@ -119,6 +119,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(URL);
     let { isAuth, user, errorMessage } = this.state;
     return (
       <Router>
@@ -141,7 +142,13 @@ export default class App extends Component {
           <Route
             path="/register"
             exact
-            render={() => <Register register={this.registerHandler} />}
+            render={() =>
+              !isAuth ? (
+                <Register register={this.registerHandler} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           />
           <Route
             path="/login"

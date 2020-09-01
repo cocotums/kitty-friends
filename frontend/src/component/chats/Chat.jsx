@@ -15,7 +15,8 @@ const Chat = () => {
   //   };
   useEffect(() => {
     socketRef.current = io.connect(URL);
-
+    // const token = localStorage.getItem(token);
+    // console.log(token);
     socketRef.current.on("your id", (id) => {
       setYourID(id);
     });

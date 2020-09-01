@@ -8,6 +8,7 @@ export default class Register extends Component {
     name: "",
     username: "",
     mobileNumber: "",
+    registerSuccess: false,
   };
 
   changeHandler = (e) => {

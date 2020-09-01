@@ -10,8 +10,9 @@ const checkToken = require("../config/config");
 */
 router.post("/register", async(req, res) => {
     let { name, username, email, password, mobileNumber } = req.body;
+    console.log(req.body);
     try {
-        let user = new User({ name, username, email, mobileNumber, password });
+        let user = new User({ name, username, email, mobileNumber });
 
         //hash password before save
         let hashPassword = await bcrypt.hash(password, 10);
@@ -40,6 +41,7 @@ router.post("/register", async(req, res) => {
             }
         );
     } catch (error) {
+        console.log(error);
         //   500 internal server error
         res.status(500).json({
             message: "oh no!!!  user not registered successfully!",
@@ -55,14 +57,14 @@ router.post("/login", async(req, res) => {
     let { username, password } = req.body;
     try {
         //search db for user with email
-        let user = await User.findOne({ email });
+        let user = await User.findOne({ username });
 
         if (!user) {
             return res.status(400).json({ message: "user not found!" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-
+        console.log(isMatch);
         if (!isMatch) {
             return res.status(400).json({ message: "Aiyo!! you tryna hack me wah?" });
         }
