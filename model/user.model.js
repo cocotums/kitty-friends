@@ -23,17 +23,6 @@ const userSchema = Schema({
         type: String,
         required: true,
     },
-    profilePicture: String,
-    // {
-    //     profilePic: {
-    //         type: Image,
-    //         default:
-    //     }
-    // },
-    //     // isAdmin: {
-    //     type: Boolean,
-    //     default: false,
-    // },
 });
 userSchema.pre("save", function(next) {
     var user = this;

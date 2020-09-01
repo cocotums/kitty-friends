@@ -10,24 +10,20 @@ const Chat = () => {
   const [message, setMessage] = useState("");
 
   const socketRef = useRef();
-  //   const connectionOptions = {
-  //     "force new connection": true,
-  //     reconnectionAttempts: "Infinity", //avoid having user reconnect manually in order to prevent dead clients after a server restart
-  //     timeout: 10000, //before connect_error and connect_timeout are emitted.
-  //     transports: ["websocket"],
+  //
+
   //   };
   useEffect(() => {
     socketRef.current = io.connect(URL);
-    // const socket = io(URL);
 
-    //   socketRef.current.on("your id", (id) => {
-    //     setYourID(id);
-    //   });
+    socketRef.current.on("your id", (id) => {
+      setYourID(id);
+    });
 
-    //   socketRef.current.on("message", (message) => {
-    //     console.log("here");
-    //     receivedMessage(message);
-    //   });
+    socketRef.current.on("message", (message) => {
+      console.log("here");
+      receivedMessage(message);
+    });
   }, []);
 
   function receivedMessage(message) {
