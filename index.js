@@ -36,24 +36,12 @@ let users = [];
 io.on("connection", (socket) => {
     console.log("connection");
 
-    socket.on("set user", (data, next) => {
-        if (user.indexOf(data) !== -1) {
-            next(false);
-        } else {
-            next(true);
-            socket.username = data;
-            users.push(data);
-
-            io.emit("users", users);
-        }
-    });
-
     socket.on("send message", (msg) => {
         console.log("send message", msg);
         io.emit("chat message", { user: socket.username, message: msg });
     });
 
-    socket.on("is typing", (msg) => {
-        socket.broadcast.emit("typing", msg);
-    });
+    // socket.on("is typing", (msg) => {
+    //     socket.broadcast.emit("typing", msg);
+    // });
 });

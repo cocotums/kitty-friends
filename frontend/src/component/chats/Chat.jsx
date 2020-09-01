@@ -4,25 +4,22 @@ import io from "socket.io-client";
 
 const URL = "http://localhost:2626";
 
-const Chat = () => {
-  const [yourID, setYourID] = useState();
+const Chat = (props) => {
+  const [user, setUser] = useState();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  const socketRef = useRef();
-  //
+  useEffect(() => {
+    console.log("mewo");
+    setUser(props.user);
+  }, [props.user]);
 
-  //   };
+  const socketRef = useRef();
+
   useEffect(() => {
     socketRef.current = io.connect(URL);
-    // const token = localStorage.getItem(token);
-    // console.log(token);
-    socketRef.current.on("your id", (id) => {
-      setYourID(id);
-    });
 
-    socketRef.current.on("message", (message) => {
-      console.log("here");
+    socketRef.current.on("chat message", (message) => {
       receivedMessage(message);
     });
   }, []);
@@ -33,41 +30,58 @@ const Chat = () => {
 
   function sendMessage(e) {
     e.preventDefault();
+    let { _id, username } = user;
+
     const messageObject = {
       body: message,
-      id: yourID,
+      id: _id,
+      name: username,
     };
     setMessage("");
     socketRef.current.emit("send message", messageObject);
   }
 
   function handleChange(e) {
-    setMessage(e.target.value);
+    if (e.key !== "Enter") {
+      setMessage(e.target.value);
+    }
+  }
+
+  function onEnter(e) {
+    if (e.key == "Enter") {
+      sendMessage(e);
+    }
   }
 
   return (
     <Page>
       <Container>
-        {messages.map((message, i) => {
-          if (message.id === yourID) {
+        {messages &&
+          messages.map((msg, i) => {
+            if (msg.message.id == user._id) {
+              return (
+                <MyRow key={i}>
+                  <MyMessage>
+                    {msg.message.name} : {msg.message.body}
+                  </MyMessage>
+                </MyRow>
+              );
+            }
             return (
-              <MyRow key={i}>
-                <MyMessage>{message.body}</MyMessage>
-              </MyRow>
+              <PartnerRow key={i}>
+                <PartnerMessage>
+                  {msg.message.name} : {msg.message.body}
+                </PartnerMessage>
+              </PartnerRow>
             );
-          }
-          return (
-            <PartnerRow key={i}>
-              <PartnerMessage>{message.body}</PartnerMessage>
-            </PartnerRow>
-          );
-        })}
+          })}
       </Container>
       <Form onSubmit={sendMessage}>
         <TextArea
           value={message}
           onChange={handleChange}
           placeholder="Say something..."
+          onKeyPress={onEnter}
         />
         <Button>Send</Button>
       </Form>

@@ -157,8 +157,11 @@ export default class App extends Component {
               isAuth ? <Redirect to="/" /> : <Login login={this.loginHandler} />
             }
           />
-
-          <Route path="/chat" exact component={Chat} />
+          <Route
+            path="/chat"
+            exact
+            render={() => <Chat user={this.state.user} />}
+          />
         </Switch>
       </Router>
     );
