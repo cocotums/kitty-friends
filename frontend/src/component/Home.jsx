@@ -29,13 +29,17 @@ export default class Home extends Component {
     return (
       <div>
         <h1>Home</h1>
+        <div
+          className="bodymovin"
+          data-icon="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/maneki/maneki.json"
+        ></div>
         <Container>
           <Row>
             {this.state.cats.map((cat) => (
               <Col key={cat._id} md="4">
                 <Card>
                   <Card.Body>
-                    <img src={cat.picture} />
+                    <Card.Img variant="top" src={cat.picture} />
                     <div>
                       <Link to={`/cat/${cat._id}`}>{cat.name}</Link>
                     </div>

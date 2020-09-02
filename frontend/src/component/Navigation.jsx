@@ -15,6 +15,9 @@ function Navigation({ user, logout }) {
           <Link className="nav-link" to="/cat/add">
             Add Cat
           </Link>
+          <Link className="nav-link" to="/chat">
+            Chat
+          </Link>
         </Nav>
 
         <Nav>

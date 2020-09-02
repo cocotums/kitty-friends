@@ -14,10 +14,10 @@ const catSchema = Schema({
         type: String,
         required: false,
     },
-    location: [{
-        type: Number,
-        required: true,
-    }, ],
+    // locations: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Location",
+    // }, ],
     // imgUrl: String,
     // imgUrls: [{
     //     path: String,
@@ -34,5 +34,12 @@ const catSchema = Schema({
     // },
 });
 
+// const LocationsSchema = new mongoose.Schema({
+//     location: String,
+// });
 const Cat = mongoose.model("Cat", catSchema);
-module.exports = Cat;
+//const Location = mongoose.model("Location", LocationsSchema, "locations");
+module.exports = {
+    Cat,
+    // Location,
+};

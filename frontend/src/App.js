@@ -16,6 +16,7 @@ import PrivateRoute from "./component/PrivateRoute";
 import { Alert } from "react-bootstrap";
 import Cat from "./component/cats/Cat";
 import Chat from "./component/chats/Chat";
+import "./index.css";
 
 const URL = process.env.REACT_APP_URL;
 

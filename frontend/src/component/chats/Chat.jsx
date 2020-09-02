@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
+import "./chatStyle.scss";
 
 const URL = "http://localhost:2626";
 
@@ -60,130 +61,42 @@ const Chat = (props) => {
   }
 
   return (
-    <Page>
-      <Container ref={chatbox}>
+    <div className="page">
+      <div className="container" ref={chatbox}>
         <ScrollToBottom>
           {messages &&
             messages.map((msg, i) => {
               if (msg.message.id === user._id) {
                 return (
-                  <MyRow key={i}>
-                    <MyMessage>
+                  <div className="myRow" key={i}>
+                    <div className="myMessage">
                       {msg.message.name} : {msg.message.body}
-                    </MyMessage>
-                  </MyRow>
+                    </div>
+                  </div>
                 );
               }
               return (
-                <PartnerRow key={i}>
-                  <PartnerMessage>
+                <div className="partnerRow" key={i}>
+                  <div className="partnerMessage">
                     {msg.message.name} : {msg.message.body}
-                  </PartnerMessage>
-                </PartnerRow>
+                  </div>
+                </div>
               );
             })}
         </ScrollToBottom>
-      </Container>
-      <Form onSubmit={sendMessage}>
-        <TextArea
+      </div>
+      <form classname="form" onSubmit={sendMessage}>
+        <textarea
+          className={"textbox"}
           value={message}
           onChange={handleChange}
           placeholder="Say something..."
           onKeyPress={onEnter}
         />
-        <Button>Send</Button>
-      </Form>
-    </Page>
+        <button className="button">Send</button>
+      </form>
+    </div>
   );
 };
 
 export default Chat;
-
-const Page = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  align-items: center;
-  background-color: #e0dfd5;
-  flex-direction: column;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  max-height: 500px;
-  overflow: auto;
-  width: 700px;
-  border: 2px solid #313638;
-  border-radius: 10px;
-  padding-bottom: 10px;
-  margin-top: 25px;
-`;
-
-const TextArea = styled.textarea`
-  width: 500px;
-  height: 100px;
-  border-radius: 10px;
-  margin-top: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
-  font-size: 17px;
-  background-color: transparent;
-  border: 1px solid #313638;
-  outline: none;
-  color: lightgray;
-  letter-spacing: 1px;
-  line-height: 20px;
-  ::placeholder {
-    color: lightgray;
-  }
-`;
-
-const Button = styled.button`
-  background-color: #546a76;
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-radius: 10px;
-  color: #46516e;
-  font-size: 17px;
-`;
-
-const Form = styled.form`
-  width: 400px;
-`;
-
-const MyRow = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-`;
-
-const MyMessage = styled.div`
-  width: 80%;
-  background-color: pink;
-  color: #46516e;
-  padding: 10px;
-  margin-right: 5px;
-  text-align: left;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
-`;
-
-const PartnerRow = styled(MyRow)`
-  justify-content: flex-start;
-`;
-
-const PartnerMessage = styled.div`
-  width: 80%;
-  background-color: transparent;
-  color: lightgray;
-  border: 1px solid lightgray;
-  padding: 10px;
-  margin-left: 5px;
-  text-align: left;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
-`;

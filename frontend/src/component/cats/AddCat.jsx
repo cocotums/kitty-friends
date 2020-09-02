@@ -58,8 +58,22 @@ export default class AddCat extends Component {
               onChange={this.changeHandler}
             />
           </Row>
+
+          {/* <Row>
+            <Form.Control
+              name="location"
+              value={location}
+              onChange={this.changeHandler}
+            />
+          </Row> */}
+
           <Row>
-            <Map />
+            <Map
+              google={this.props.google}
+              center={{ lat: 1.2832, lng: 103.8466 }}
+              height="650px"
+              zoom={15}
+            />
           </Row>
 
           <Button onClick={this.submitHandler}>Submit</Button>

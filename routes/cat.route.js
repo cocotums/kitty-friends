@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Cat = require("../model/cat.model");
+const { Cat } = require("../model/cat.model");
 // const checkToken = require("../config/config");
 /* 
     @route GET api/items/:id
@@ -21,6 +21,7 @@ router.get("/:id", async(req, res) => {
         });
     }
 });
+
 /* 
     @route PUT api/items/:id
     @desc updates one item
@@ -64,8 +65,11 @@ router.delete("/:id", async(req, res) => {
 });
 
 router.post("/", async(req, res) => {
+    console.log("HEEEERRERREEE");
     try {
-        let cat = new Cat(req.body);
+        console.log(req.body);
+        const { name, description, picture } = req.body;
+        let cat = new Cat({ name, description, picture });
 
         let savedCat = await cat.save();
 
@@ -73,6 +77,7 @@ router.post("/", async(req, res) => {
             message: "sukses",
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "server error",
             statuscode: "EB500",
