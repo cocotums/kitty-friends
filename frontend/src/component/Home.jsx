@@ -35,9 +35,9 @@ export default class Home extends Component {
               <Col key={cat._id} md="4">
                 <Card>
                   <Card.Body>
-                    {cat.title}
+                    <img src={cat.picture} />
                     <div>
-                      <Link to={`/cat/${cat._id}`}>See Cat</Link>
+                      <Link to={`/cat/${cat._id}`}>{cat.name}</Link>
                     </div>
                   </Card.Body>
                 </Card>

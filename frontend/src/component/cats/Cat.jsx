@@ -68,6 +68,7 @@ export default class Cat extends Component {
             <div>
               <img src={cat.picture} width="400" />{" "}
             </div>
+            <div>Last seen: {cat.location}</div>
             <Button onClick={this.showEdit}>Update Cat</Button>
             {edit && <EditCat cat={cat} editCat={this.editCats} />}
           </div>

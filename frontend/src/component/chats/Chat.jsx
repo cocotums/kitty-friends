@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const URL = "http://localhost:2626";
 
@@ -15,6 +16,7 @@ const Chat = (props) => {
   }, [props.user]);
 
   const socketRef = useRef();
+  const chatbox = useRef();
 
   useEffect(() => {
     socketRef.current = io.connect(URL);
@@ -38,6 +40,10 @@ const Chat = (props) => {
       name: username,
     };
     setMessage("");
+    chatbox.current.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
     socketRef.current.emit("send message", messageObject);
   }
 
@@ -48,33 +54,35 @@ const Chat = (props) => {
   }
 
   function onEnter(e) {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       sendMessage(e);
     }
   }
 
   return (
     <Page>
-      <Container>
-        {messages &&
-          messages.map((msg, i) => {
-            if (msg.message.id == user._id) {
+      <Container ref={chatbox}>
+        <ScrollToBottom>
+          {messages &&
+            messages.map((msg, i) => {
+              if (msg.message.id === user._id) {
+                return (
+                  <MyRow key={i}>
+                    <MyMessage>
+                      {msg.message.name} : {msg.message.body}
+                    </MyMessage>
+                  </MyRow>
+                );
+              }
               return (
-                <MyRow key={i}>
-                  <MyMessage>
+                <PartnerRow key={i}>
+                  <PartnerMessage>
                     {msg.message.name} : {msg.message.body}
-                  </MyMessage>
-                </MyRow>
+                  </PartnerMessage>
+                </PartnerRow>
               );
-            }
-            return (
-              <PartnerRow key={i}>
-                <PartnerMessage>
-                  {msg.message.name} : {msg.message.body}
-                </PartnerMessage>
-              </PartnerRow>
-            );
-          })}
+            })}
+        </ScrollToBottom>
       </Container>
       <Form onSubmit={sendMessage}>
         <TextArea
@@ -96,7 +104,7 @@ const Page = styled.div`
   height: 100vh;
   width: 100%;
   align-items: center;
-  background-color: #46516e;
+  background-color: #e0dfd5;
   flex-direction: column;
 `;
 
@@ -106,15 +114,15 @@ const Container = styled.div`
   height: 500px;
   max-height: 500px;
   overflow: auto;
-  width: 400px;
-  border: 1px solid lightgray;
+  width: 700px;
+  border: 2px solid #313638;
   border-radius: 10px;
   padding-bottom: 10px;
   margin-top: 25px;
 `;
 
 const TextArea = styled.textarea`
-  width: 98%;
+  width: 500px;
   height: 100px;
   border-radius: 10px;
   margin-top: 10px;
@@ -122,7 +130,7 @@ const TextArea = styled.textarea`
   padding-top: 10px;
   font-size: 17px;
   background-color: transparent;
-  border: 1px solid lightgray;
+  border: 1px solid #313638;
   outline: none;
   color: lightgray;
   letter-spacing: 1px;
@@ -133,7 +141,7 @@ const TextArea = styled.textarea`
 `;
 
 const Button = styled.button`
-  background-color: pink;
+  background-color: #546a76;
   width: 100%;
   border: none;
   height: 50px;
@@ -154,12 +162,12 @@ const MyRow = styled.div`
 `;
 
 const MyMessage = styled.div`
-  width: 45%;
+  width: 80%;
   background-color: pink;
   color: #46516e;
   padding: 10px;
   margin-right: 5px;
-  text-align: center;
+  text-align: left;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 `;
@@ -169,13 +177,13 @@ const PartnerRow = styled(MyRow)`
 `;
 
 const PartnerMessage = styled.div`
-  width: 45%;
+  width: 80%;
   background-color: transparent;
   color: lightgray;
   border: 1px solid lightgray;
   padding: 10px;
   margin-left: 5px;
-  text-align: center;
+  text-align: left;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
 `;
