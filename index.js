@@ -4,12 +4,14 @@ const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
 const cors = require("cors");
+const path = require("path");
 
 //add all middlewares
 
 require("./config/db"); //(calls my mongoose connection to cleanup this file)
 
 app.use(express.json()); //(allows me to receive JSON files from HEADER of REQUEST)
+app.use(express.static("frontend/build"));
 app.use(cors());
 
 //setup routes
@@ -18,10 +20,14 @@ app.use("/api/cats", require("./routes/cat.route"));
 app.use("/api/auth", require("./routes/auth.route"));
 app.use("/api/chat", require("./routes/chat.route"));
 
-//404 errors
-app.get("*", (req, res) => {
-    res.status(404).json({ message: "i am lost", code: "error 404" });
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/frontend/build/index.html"));
 });
+
+//404 errors
+//app.get("*", (req, res) => {
+//  res.status(404).json({ message: "i am lost", code: "error 404" });
+// });
 // setup the server port
 
 const server = app.listen(process.env.PORT, () =>
