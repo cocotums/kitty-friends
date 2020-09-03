@@ -31,6 +31,7 @@ export default class Register extends Component {
                 name="name"
                 type="text"
                 onChange={this.changeHandler}
+                placeholder="name"
               />
             </Row>
             <Row>
@@ -38,6 +39,7 @@ export default class Register extends Component {
                 name="email"
                 type="email"
                 onChange={this.changeHandler}
+                placeholder="email"
               />
             </Row>
             <Row>
@@ -45,6 +47,7 @@ export default class Register extends Component {
                 name="mobileNumber"
                 type="number"
                 onChange={this.changeHandler}
+                placeholder="mobile number"
               />
             </Row>
             <Row>
@@ -52,6 +55,7 @@ export default class Register extends Component {
                 name="username"
                 type="text"
                 onChange={this.changeHandler}
+                placeholder="username"
               />
             </Row>
             <Row>
@@ -59,6 +63,7 @@ export default class Register extends Component {
                 name="password"
                 type="password"
                 onChange={this.changeHandler}
+                placeholder="password"
               />
             </Row>
 

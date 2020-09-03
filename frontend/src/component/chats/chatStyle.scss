@@ -18,6 +18,7 @@
     border-radius: 10px;
     padding-bottom: 10px;
     margin-top: 25px;
+    overflow-wrap: break-word;
 }
 
 .textbox {
@@ -35,13 +36,14 @@
     letter-spacing: 1px;
     line-height: 20px;
      ::placeholder {
-        color: lightgray;
+        color: darkgray;
     }
 }
 
 .button {
-    background-color: #546a76;
-    width: 110%;
+    background-color: #c3dfe0;
+    border: 1px solid #313638;
+    width: 90%;
     border: none;
     height: 50px;
     border-radius: 10px;
@@ -63,7 +65,7 @@
 
 .myMessage {
     width: 60%;
-    background-color: #546a76;
+    background-color: #c3dfe0;
     color: black;
     padding: 10px;
     margin-right: 5px;
@@ -78,7 +80,7 @@
 
 .partnerMessage {
     width: 60%;
-    background-color: #94a89a;
+    background-color: #faa275;
     color: black;
     border: 1px solid lightgray;
     padding: 10px;
@@ -86,4 +88,15 @@
     text-align: left;
     border-top-left-radius: 10%;
     border-bottom-left-radius: 10%;
+}
+
+.container-input {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    max-height: 500px;
+    overflow: auto;
+    width: 500px;
+    padding-bottom: 10px;
+    margin-top: 25px;
 }

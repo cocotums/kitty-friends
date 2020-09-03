@@ -68,15 +68,16 @@ export default class Cat extends Component {
             <div>
               <img src={cat.picture} width="400" />{" "}
             </div>
-            <div>Last seen: {cat.location}</div>
+
             <Button onClick={this.showEdit}>Update Cat</Button>
             {edit && <EditCat cat={cat} editCat={this.editCats} />}
+            <Button variant="danger" onClick={this.removeCat}>
+              Remove cat
+            </Button>
           </div>
         ) : (
           "ho liao buey!"
         )}
-
-        <button onClick={this.removeCat}>Remove cat</button>
       </Container>
     );
   }

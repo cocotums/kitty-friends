@@ -42,6 +42,7 @@ export default class AddCat extends Component {
               name="name"
               value={name}
               onChange={this.changeHandler}
+              placeholder="name"
             />
           </Row>
           <Row>
@@ -49,6 +50,7 @@ export default class AddCat extends Component {
               name="description"
               value={description}
               onChange={this.changeHandler}
+              placeholder="description"
             />
           </Row>
           <Row>
@@ -56,6 +58,7 @@ export default class AddCat extends Component {
               name="picture"
               value={picture}
               onChange={this.changeHandler}
+              placeholder="picture URL"
             />
           </Row>
 
@@ -67,14 +70,14 @@ export default class AddCat extends Component {
             />
           </Row> */}
 
-          <Row>
+          {/* <Row>
             <Map
               google={this.props.google}
               center={{ lat: 1.2832, lng: 103.8466 }}
               height="650px"
               zoom={15}
             />
-          </Row>
+          </Row> */}
 
           <Button onClick={this.submitHandler}>Submit</Button>
         </Container>
