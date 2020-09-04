@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import "./chatStyle.scss";
 import { animateScroll } from "react-scroll";
-import Picker from "emoji-picker-react";
+// import Picker from "emoji-picker-react";
 
 const URL = process.env.REACT_APP_HEROKU_URL;
 
@@ -10,13 +10,13 @@ const Chat = (props) => {
   const [user, setUser] = useState();
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [chosenEmoji, setChosenEmoji] = useState(null);
+  // const [chosenEmoji, setChosenEmoji] = useState(null);
 
-  const onEmojiClick = (e, emojiObj) => {
-    setChosenEmoji(emojiObj.emoji);
-    setMessage(emojiObj.emoji);
-    console.log(emojiObj.emoji);
-  };
+  // const onEmojiClick = (e, emojiObj) => {
+  //   setChosenEmoji(emojiObj.emoji);
+  //   setMessage(emojiObj.emoji);
+  //   console.log(emojiObj.emoji);
+  // };
 
   const scrollToBottom = () => {
     animateScroll.scrollToBottom({
@@ -100,7 +100,7 @@ const Chat = (props) => {
             placeholder="Say something..."
             onKeyPress={onEnter}
           />
-          <Picker onEmojiClick={onEmojiClick} />
+          {/* <Picker onEmojiClick={onEmojiClick} /> */}
 
           <button className="button">Send</button>
         </form>
