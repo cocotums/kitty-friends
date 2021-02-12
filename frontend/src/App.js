@@ -75,7 +75,7 @@ export default class App extends Component {
         });
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         this.setState({
           isAuth: false,
           errorMessage: err.response.data.message,
